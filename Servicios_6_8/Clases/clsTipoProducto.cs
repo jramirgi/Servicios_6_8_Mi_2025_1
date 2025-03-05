@@ -27,15 +27,15 @@ namespace Servicios_6_8.Clases
                 return "Error: " + ex.Message;
             }
         }
-        public PRODucto Consultar(int Codigo)
+        public TIpoPRoducto Consultar(int Codigo)
         {
-            return dbSuper.PRODuctoes.Where(x => x.Codigo == Codigo).FirstOrDefault();
+            return dbSuper.TIpoPRoductoes.Where(x => x.Codigo == Codigo).FirstOrDefault();
         }
         public string Actualizar()
         {
             try
             {
-                TIpoPRoducto tipoProducto = dbSuper.TIpoPRoductoes.Where(x => x.Codigo == TipoProducto.Codigo).FirstOrDefault();
+                TIpoPRoducto tipoProducto = Consultar(TipoProducto.Codigo);
                 tipoProducto.Nombre = TipoProducto.Nombre;
                 tipoProducto.Activo = TipoProducto.Activo;
                 dbSuper.SaveChanges();
