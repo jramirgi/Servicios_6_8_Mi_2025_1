@@ -164,6 +164,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Clases\clsEmpleado.cs" />
+    <Compile Include="Clases\clsImagenesProducto.cs" />
     <Compile Include="Clases\clsProducto.cs" />
     <Compile Include="Clases\clsTipoProducto.cs" />
     <Compile Include="Clases\clsUpload.cs" />
@@ -228,6 +229,9 @@
       <DependentUpon>DBSuper.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FActuraCOmpra.cs">
+      <DependentUpon>DBSuper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FotosEmpleado.cs">
       <DependentUpon>DBSuper.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ImagenesProducto.cs">
@@ -299,8 +303,8 @@
     <Content Include="Global.asax" />
     <Content Include="Models\DBSuper.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DBSuper.Context.cs</LastGenOutput>
       <DependentUpon>DBSuper.edmx</DependentUpon>
+      <LastGenOutput>DBSuper.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\DBSuper.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

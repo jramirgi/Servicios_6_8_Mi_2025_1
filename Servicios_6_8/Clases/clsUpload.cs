@@ -27,6 +27,7 @@ namespace Servicios_6_8.Clases
             try
             {
                 await request.Content.ReadAsMultipartAsync(provider);
+                List<string> Archivos = new List<string>();
                 foreach (MultipartFileData file in provider.FileData)
                 {
                     string fileName = file.Headers.ContentDisposition.FileName;
@@ -46,15 +47,31 @@ namespace Servicios_6_8.Clases
                         //Se da una respuesta de error
                         return request.CreateErrorResponse(HttpStatusCode.Conflict, "El archivo ya existe");
                     }
+                    Archivos.Add(fileName);
                     //Se renombra el archivo
                     File.Move(file.LocalFileName, Path.Combine(root, fileName));
                 }
+                //Envía a grabar la información de las imágenes
+                string Respuesta = ProcesarArchivos(Archivos);
                 //Se da una respuesta de éxito
                 return request.CreateResponse(HttpStatusCode.OK, "Archivo subido con éxito");
             }
             catch (Exception ex)
             {
                 return request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Error al cargar el archivo: " + ex.Message);
+            }
+        }
+        private string ProcesarArchivos(List<string> Archivos)
+        {
+            switch (Proceso.ToUpper())
+            {
+                case "PRODUCTO":
+                    clsImagenesProducto ImagenesProducto = new clsImagenesProducto();
+                    ImagenesProducto.idProducto = Datos;//Debe venir la información que se procesa en la base de datos, para nuestro caso, el código del producto
+                    ImagenesProducto.Archivos = Archivos;
+                    return ImagenesProducto.GrabarImagenes();
+                default:
+                    return "Proceso no válido";
             }
         }
     }

@@ -21,7 +21,6 @@ namespace Servicios_6_8.Models
         public int ValorUnitario { get; set; }
         public System.DateTime FechaCotizacion { get; set; }
         public System.DateTime FechaValidez { get; set; }
-
         [JsonIgnore]
         public virtual PRODucto PRODucto { get; set; }
         [JsonIgnore]

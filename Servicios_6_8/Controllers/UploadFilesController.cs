@@ -17,6 +17,8 @@ namespace Servicios_6_8.Controllers
         {
             clsUpload UploadFiles = new clsUpload();
             UploadFiles.request = Request;
+            UploadFiles.Datos = Datos;
+            UploadFiles.Proceso = Proceso;
             return await UploadFiles.GrabarArchivo();
         }
     }

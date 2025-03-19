@@ -9,20 +9,15 @@
 
 namespace Servicios_6_8.Models
 {
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
-    public partial class DEtalleFActura
+    public partial class FotosEmpleado
     {
-        public int Codigo { get; set; }
-        public int Numero { get; set; }
-        public int CodigoProducto { get; set; }
-        public int Cantidad { get; set; }
-        public int ValorUnitario { get; set; }
-        [JsonIgnore]
-        public virtual PRODucto PRODucto { get; set; }
-        [JsonIgnore]
-        public virtual FACTura FACTura { get; set; }
+        public int IdFoto { get; set; }
+        public string idEmpleado { get; set; }
+        public string NombreFoto { get; set; }
+    
+        public virtual EMPLeado EMPLeado { get; set; }
     }
 }

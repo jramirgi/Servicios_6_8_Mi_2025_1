@@ -20,6 +20,7 @@ namespace Servicios_6_8.Models
         {
             this.DEtalleFActuras = new HashSet<DEtalleFActura>();
             this.DEtalleFacturaCompras = new HashSet<DEtalleFacturaCompra>();
+            this.ImagenesProductoes = new HashSet<ImagenesProducto>();
             this.PRoductoPRoveedors = new HashSet<PRoductoPRoveedor>();
         }
     
@@ -29,17 +30,21 @@ namespace Servicios_6_8.Models
         public int Cantidad { get; set; }
         public int ValorUnitario { get; set; }
         public int CodigoTipoProducto { get; set; }
-
+        public bool Activo { get; set; }
         [JsonIgnore]
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DEtalleFActura> DEtalleFActuras { get; set; }
         [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DEtalleFacturaCompra> DEtalleFacturaCompras { get; set; }
         [JsonIgnore]
-        public virtual TIpoPRoducto TIpoPRoducto { get; set; }
-        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ImagenesProducto> ImagenesProductoes { get; set; }
+        [JsonIgnore]
+        public virtual TIpoPRoducto TIpoPRoducto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
         public virtual ICollection<PRoductoPRoveedor> PRoductoPRoveedors { get; set; }
     }
 }

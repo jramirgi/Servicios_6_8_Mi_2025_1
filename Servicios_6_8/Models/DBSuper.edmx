@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DBSuperModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DBSuperModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CARGo">
           <Key>
             <PropertyRef Name="Codigo" />
@@ -135,6 +135,14 @@
           <Property Name="DocumentoProveedor" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Fecha" Type="datetime" Nullable="false" />
           <Property Name="FechaPago" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FotosEmpleados">
+          <Key>
+            <PropertyRef Name="IdFoto" />
+          </Key>
+          <Property Name="IdFoto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idEmpleado" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NombreFoto" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="ImagenesProducto">
           <Key>
@@ -357,6 +365,18 @@
             </Principal>
             <Dependent Role="EMpleadoCArgo">
               <PropertyRef Name="Documento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FotosEmpleados_EMPLeado">
+          <End Role="EMPLeado" Type="Self.EMPLeado" Multiplicity="1" />
+          <End Role="FotosEmpleados" Type="Self.FotosEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLeado">
+              <PropertyRef Name="Documento" />
+            </Principal>
+            <Dependent Role="FotosEmpleados">
+              <PropertyRef Name="idEmpleado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -626,6 +646,7 @@
           <EntitySet Name="EMpleadoCArgo" EntityType="Self.EMpleadoCArgo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FACTura" EntityType="Self.FACTura" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FActuraCOmpra" EntityType="Self.FActuraCOmpra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FotosEmpleados" EntityType="Self.FotosEmpleados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImagenesProducto" EntityType="Self.ImagenesProducto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NOtaCRedito" EntityType="Self.NOtaCRedito" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="dbo" store:Type="Tables" />
@@ -668,6 +689,10 @@
           <AssociationSet Name="FK_EMpleadoCArgo_EMPLeado" Association="Self.FK_EMpleadoCArgo_EMPLeado">
             <End Role="EMPLeado" EntitySet="EMPLeado" />
             <End Role="EMpleadoCArgo" EntitySet="EMpleadoCArgo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FotosEmpleados_EMPLeado" Association="Self.FK_FotosEmpleados_EMPLeado">
+            <End Role="EMPLeado" EntitySet="EMPLeado" />
+            <End Role="FotosEmpleados" EntitySet="FotosEmpleados" />
           </AssociationSet>
           <AssociationSet Name="FK_ImagenesProducto_PRODucto" Association="Self.FK_ImagenesProducto_PRODucto">
             <End Role="PRODucto" EntitySet="PRODucto" />
@@ -754,7 +779,8 @@
             <End Role="PRoductoPRoveedor" EntitySet="PRoductoPRoveedor" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBSuperModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -876,6 +902,7 @@
           <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
           <NavigationProperty Name="EMpleadoCArgoes" Relationship="Self.FK_EMpleadoCArgo_EMPLeado" FromRole="EMPLeado" ToRole="EMpleadoCArgo" />
+          <NavigationProperty Name="FotosEmpleados" Relationship="Self.FK_FotosEmpleados_EMPLeado" FromRole="EMPLeado" ToRole="FotosEmpleados" />
           <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuario_EMPLeado" FromRole="EMPLeado" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="EMpleadoCArgo">
@@ -920,6 +947,24 @@
           <NavigationProperty Name="EMpleadoCArgo" Relationship="Self.FKFacturaCOmpraEmpleadoCArgo" FromRole="FActuraCOmpra" ToRole="EMpleadoCArgo" />
           <NavigationProperty Name="PROVeedor" Relationship="Self.FKFacturaCOmpraProveedor" FromRole="FActuraCOmpra" ToRole="PROVeedor" />
         </EntityType>
+        <EntityType Name="FotosEmpleado">
+          <Key>
+            <PropertyRef Name="IdFoto" />
+          </Key>
+          <Property Name="IdFoto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idEmpleado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NombreFoto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EMPLeado" Relationship="Self.FK_FotosEmpleados_EMPLeado" FromRole="FotosEmpleados" ToRole="EMPLeado" />
+        </EntityType>
+        <EntityType Name="ImagenesProducto">
+          <Key>
+            <PropertyRef Name="idImagen" />
+          </Key>
+          <Property Name="idImagen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreImagen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idProducto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PRODucto" Relationship="Self.FK_ImagenesProducto_PRODucto" FromRole="ImagenesProducto" ToRole="PRODucto" />
+        </EntityType>
         <EntityType Name="NOtaCRedito">
           <Key>
             <PropertyRef Name="Numero" />
@@ -957,12 +1002,12 @@
           <Property Name="Cantidad" Type="Int32" Nullable="false" />
           <Property Name="ValorUnitario" Type="Int32" Nullable="false" />
           <Property Name="CodigoTipoProducto" Type="Int32" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="DEtalleFActuras" Relationship="Self.FK_DEtalleFActuraucto" FromRole="PRODucto" ToRole="DEtalleFActura" />
           <NavigationProperty Name="DEtalleFacturaCompras" Relationship="Self.FK_DEtalleFacturaCompraucto" FromRole="PRODucto" ToRole="DEtalleFacturaCompra" />
+          <NavigationProperty Name="ImagenesProductoes" Relationship="Self.FK_ImagenesProducto_PRODucto" FromRole="PRODucto" ToRole="ImagenesProducto" />
           <NavigationProperty Name="TIpoPRoducto" Relationship="Self.FKProducto_TIpoPRoducto" FromRole="PRODucto" ToRole="TIpoPRoducto" />
           <NavigationProperty Name="PRoductoPRoveedors" Relationship="Self.FKProductoPRoveedoructo" FromRole="PRODucto" ToRole="PRoductoPRoveedor" />
-          <Property Name="Activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ImagenesProductoes" Relationship="DBSuperModel.FK_ImagenesProducto_PRODucto" FromRole="PRODucto" ToRole="ImagenesProducto" />
         </EntityType>
         <EntityType Name="PRoductoPRoveedor">
           <Key>
@@ -1256,6 +1301,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FotosEmpleados_EMPLeado">
+          <End Role="EMPLeado" Type="Self.EMPLeado" Multiplicity="1" />
+          <End Role="FotosEmpleados" Type="Self.FotosEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLeado">
+              <PropertyRef Name="Documento" />
+            </Principal>
+            <Dependent Role="FotosEmpleados">
+              <PropertyRef Name="idEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Usuario_EMPLeado">
           <End Role="EMPLeado" Type="Self.EMPLeado" Multiplicity="0..1" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
@@ -1313,6 +1370,18 @@
             </Principal>
             <Dependent Role="FActuraCOmpra">
               <PropertyRef Name="DocumentoProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ImagenesProducto_PRODucto">
+          <End Role="PRODucto" Type="Self.PRODucto" Multiplicity="1" />
+          <End Role="ImagenesProducto" Type="Self.ImagenesProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODucto">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="ImagenesProducto">
+              <PropertyRef Name="idProducto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1414,6 +1483,8 @@
           <EntitySet Name="EMpleadoCArgoes" EntityType="Self.EMpleadoCArgo" />
           <EntitySet Name="FACTuras" EntityType="Self.FACTura" />
           <EntitySet Name="FActuraCOmpras" EntityType="Self.FActuraCOmpra" />
+          <EntitySet Name="FotosEmpleados" EntityType="Self.FotosEmpleado" />
+          <EntitySet Name="ImagenesProductoes" EntityType="Self.ImagenesProducto" />
           <EntitySet Name="NOtaCReditoes" EntityType="Self.NOtaCRedito" />
           <EntitySet Name="PAIS" EntityType="Self.PAI" />
           <EntitySet Name="Perfils" EntityType="Self.Perfil" />
@@ -1488,6 +1559,10 @@
             <End Role="EMPLeado" EntitySet="EMPLeadoes" />
             <End Role="EMpleadoCArgo" EntitySet="EMpleadoCArgoes" />
           </AssociationSet>
+          <AssociationSet Name="FK_FotosEmpleados_EMPLeado" Association="Self.FK_FotosEmpleados_EMPLeado">
+            <End Role="EMPLeado" EntitySet="EMPLeadoes" />
+            <End Role="FotosEmpleados" EntitySet="FotosEmpleados" />
+          </AssociationSet>
           <AssociationSet Name="FK_Usuario_EMPLeado" Association="Self.FK_Usuario_EMPLeado">
             <End Role="EMPLeado" EntitySet="EMPLeadoes" />
             <End Role="Usuario" EntitySet="Usuarios" />
@@ -1507,6 +1582,10 @@
           <AssociationSet Name="FKFacturaCOmpraProveedor" Association="Self.FKFacturaCOmpraProveedor">
             <End Role="PROVeedor" EntitySet="PROVeedors" />
             <End Role="FActuraCOmpra" EntitySet="FActuraCOmpras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ImagenesProducto_PRODucto" Association="Self.FK_ImagenesProducto_PRODucto">
+            <End Role="PRODucto" EntitySet="PRODuctoes" />
+            <End Role="ImagenesProducto" EntitySet="ImagenesProductoes" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuario_Perfil_Perfil" Association="Self.FK_Usuario_Perfil_Perfil">
             <End Role="Perfil" EntitySet="Perfils" />
@@ -1536,33 +1615,7 @@
             <End Role="Usuario" EntitySet="Usuarios" />
             <End Role="Usuario_Perfil" EntitySet="Usuario_Perfil" />
           </AssociationSet>
-          <EntitySet Name="ImagenesProductoes" EntityType="DBSuperModel.ImagenesProducto" />
-          <AssociationSet Name="FK_ImagenesProducto_PRODucto" Association="DBSuperModel.FK_ImagenesProducto_PRODucto">
-            <End Role="PRODucto" EntitySet="PRODuctoes" />
-            <End Role="ImagenesProducto" EntitySet="ImagenesProductoes" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="ImagenesProducto">
-          <Key>
-            <PropertyRef Name="idImagen" />
-          </Key>
-          <Property Name="idImagen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NombreImagen" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="idProducto" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="PRODucto" Relationship="DBSuperModel.FK_ImagenesProducto_PRODucto" FromRole="ImagenesProducto" ToRole="PRODucto" />
-        </EntityType>
-        <Association Name="FK_ImagenesProducto_PRODucto">
-          <End Type="DBSuperModel.PRODucto" Role="PRODucto" Multiplicity="1" />
-          <End Type="DBSuperModel.ImagenesProducto" Role="ImagenesProducto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRODucto">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="ImagenesProducto">
-              <PropertyRef Name="idProducto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1713,6 +1766,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="FotosEmpleados">
+            <EntityTypeMapping TypeName="DBSuperModel.FotosEmpleado">
+              <MappingFragment StoreEntitySet="FotosEmpleados">
+                <ScalarProperty Name="IdFoto" ColumnName="IdFoto" />
+                <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+                <ScalarProperty Name="NombreFoto" ColumnName="NombreFoto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImagenesProductoes">
+            <EntityTypeMapping TypeName="DBSuperModel.ImagenesProducto">
+              <MappingFragment StoreEntitySet="ImagenesProducto">
+                <ScalarProperty Name="idImagen" ColumnName="idImagen" />
+                <ScalarProperty Name="NombreImagen" ColumnName="NombreImagen" />
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="NOtaCReditoes">
             <EntityTypeMapping TypeName="DBSuperModel.NOtaCRedito">
               <MappingFragment StoreEntitySet="NOtaCRedito">
@@ -1744,13 +1815,13 @@
           <EntitySetMapping Name="PRODuctoes">
             <EntityTypeMapping TypeName="DBSuperModel.PRODucto">
               <MappingFragment StoreEntitySet="PRODucto">
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="ValorUnitario" ColumnName="ValorUnitario" />
                 <ScalarProperty Name="CodigoTipoProducto" ColumnName="CodigoTipoProducto" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1856,15 +1927,6 @@
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
                 <ScalarProperty Name="idPerfil" ColumnName="idPerfil" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ImagenesProductoes">
-            <EntityTypeMapping TypeName="DBSuperModel.ImagenesProducto">
-              <MappingFragment StoreEntitySet="ImagenesProducto">
-                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
-                <ScalarProperty Name="NombreImagen" ColumnName="NombreImagen" />
-                <ScalarProperty Name="idImagen" ColumnName="idImagen" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

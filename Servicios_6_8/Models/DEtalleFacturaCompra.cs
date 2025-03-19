@@ -20,8 +20,7 @@ namespace Servicios_6_8.Models
         public int CodigoProducto { get; set; }
         public int Cantidad { get; set; }
         public int ValorUnitario { get; set; }
-        
-        [JsonIgnore]        
+        [JsonIgnore]
         public virtual PRODucto PRODucto { get; set; }
         [JsonIgnore]
         public virtual FActuraCOmpra FActuraCOmpra { get; set; }
