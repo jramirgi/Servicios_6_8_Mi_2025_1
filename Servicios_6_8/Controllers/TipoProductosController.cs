@@ -42,4 +42,5 @@ namespace Servicios_6_8.Controllers
             tipoProducto.TipoProducto = TipoProducto;
             return tipoProducto.Actualizar();
         }
+    }
 }
