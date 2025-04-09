@@ -14,6 +14,13 @@ namespace Servicios_6_8.Controllers
     public class ProductosController : ApiController
     {
         [HttpGet]
+        [Route("ConsultarImagenes")]
+        public IQueryable ConsultarImagenes(int idProducto)
+        {
+            clsProducto Producto = new clsProducto();
+            return Producto.ConsultarImagenesXProducto(idProducto);
+        }
+        [HttpGet]
         [Route("ConsultarTodos")]
         public List<PRODucto> ConsultarTodos()
         {

@@ -78,5 +78,24 @@ namespace Servicios_6_8.Clases
                 return ex.Message;
             }
         }
+        public IQueryable ConsultarImagenesXProducto(int idProducto)
+        {
+            return from P in dbSuper.Set<PRODucto>()
+                   join TP in dbSuper.Set<TIpoPRoducto>()
+                   on P.CodigoTipoProducto equals TP.Codigo
+                   join I in dbSuper.Set<ImagenesProducto>()
+                   on P.Codigo equals I.idProducto
+                   where P.Codigo == idProducto
+                   orderby I.NombreImagen
+                   select new
+                   {
+                       idTipoProducto = TP.Codigo,
+                       TipoProducto = TP.Nombre,
+                       idProducto = P.Codigo,
+                       Producto = P.Nombre,
+                       idImagen = I.idImagen,
+                       Imagen = I.NombreImagen
+                   };
+        }
     }
 }
