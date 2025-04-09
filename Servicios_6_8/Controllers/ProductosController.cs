@@ -11,6 +11,7 @@ using System.Web.Http;
 namespace Servicios_6_8.Controllers
 {
     [RoutePrefix("api/Productos")]
+    [Authorize]
     public class ProductosController : ApiController
     {
         [HttpGet]

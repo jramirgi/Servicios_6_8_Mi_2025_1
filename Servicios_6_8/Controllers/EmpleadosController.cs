@@ -10,6 +10,7 @@ using System.Web.Http;
 namespace Servicios_6_8.Controllers
 {
     [RoutePrefix("api/Empleados")]
+    [Authorize]
     /*  RoutPrefix, es una directiva que se define antes de la clase, y se utiliza para definir la ruta base de la API.
      *  GET: Se utiliza para consultar información. SELECT
      *  POST: Se utiliza para insertar información: INSERT INTO

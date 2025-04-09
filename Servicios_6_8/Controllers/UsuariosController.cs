@@ -14,6 +14,7 @@ namespace Servicios_6_8.Controllers
     {
         [HttpPost]
         [Route("CrearUsuario")]
+        [Authorize]
         public string CrearUsuario([FromBody] Usuario usuario, int idPerfil)
         {
             clsUsuario _usuario = new clsUsuario();
