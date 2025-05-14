@@ -6,9 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Servicios_6_8.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("api/Empleados")]
     [Authorize]
     /*  RoutPrefix, es una directiva que se define antes de la clase, y se utiliza para definir la ruta base de la API.

@@ -12,6 +12,7 @@ namespace Servicios_6_8
         {
             // Web API configuration and services
             config.MessageHandlers.Add(new TokenValidationHandler());
+            config.EnableCors();
 
             // Web API routes
             config.MapHttpAttributeRoutes();
