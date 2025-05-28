@@ -11,13 +11,13 @@ namespace Servicios_6_8.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using Newtonsoft.Json;
     public partial class FotosEmpleado
     {
         public int IdFoto { get; set; }
         public string idEmpleado { get; set; }
         public string NombreFoto { get; set; }
-    
+        [JsonIgnore]
         public virtual EMPLeado EMPLeado { get; set; }
     }
 }

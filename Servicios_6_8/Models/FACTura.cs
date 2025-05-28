@@ -11,7 +11,7 @@ namespace Servicios_6_8.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using Newtonsoft.Json;
     public partial class FACTura
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,10 +24,12 @@ namespace Servicios_6_8.Models
         public string Documento { get; set; }
         public System.DateTime Fecha { get; set; }
         public int CodigoEmpleado { get; set; }
-    
+        [JsonIgnore]
         public virtual CLIEnte CLIEnte { get; set; }
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DEtalleFActura> DEtalleFActuras { get; set; }
+        [JsonIgnore]
         public virtual EMpleadoCArgo EMpleadoCArgo { get; set; }
     }
 }

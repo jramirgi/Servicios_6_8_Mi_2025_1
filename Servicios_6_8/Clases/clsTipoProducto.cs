@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 
 namespace Servicios_6_8.Clases
@@ -45,6 +46,24 @@ namespace Servicios_6_8.Clases
             {
                 return "Error: " + ex.Message;
             }
+        }
+        public List<TIpoPRoducto> LlenarCombo()
+        {
+            return dbSuper.TIpoPRoductoes
+                .Where(t => t.Activo == true)
+                .OrderBy(t => t.Nombre)
+                .ToList();
+        }
+        public IQueryable LlenarComboTipo()
+        {
+            return from T in dbSuper.Set<TIpoPRoducto>()
+                   where T.Activo == true
+                   orderby T.Nombre
+                   select new
+                   {
+                       Codigo = T.Codigo,
+                       Nombre = T.Nombre
+                   };
         }
     }
 }

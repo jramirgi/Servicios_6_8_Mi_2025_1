@@ -76,5 +76,12 @@ namespace Servicios_6_8.Controllers
             clsEmpleado Empleado = new clsEmpleado();
             return Empleado.EliminarXDocumento(Documento);
         }
+        [HttpGet]
+        [Route("ConsultarXUsuario")]
+        public IQueryable ConsultarXUsuario(string Usuario)
+        {
+            clsEmpleado Empleado = new clsEmpleado();
+            return Empleado.ConsultarXUsuario(Usuario);
+        }
     }
 }

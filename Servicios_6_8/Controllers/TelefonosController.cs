@@ -10,7 +10,7 @@ using System.Web.Http.Cors;
 
 namespace Servicios_6_8.Controllers
 {
-    [EnableCors(origins: "https://localhost:44306", headers: "*", methods: "*")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("api/Telefonos")]
     [Authorize]
     public class TelefonosController : ApiController

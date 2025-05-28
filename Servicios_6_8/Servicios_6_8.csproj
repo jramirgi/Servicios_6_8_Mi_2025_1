@@ -225,22 +225,26 @@
     <Compile Include="Clases\clsCliente.cs" />
     <Compile Include="Clases\clsCypher.cs" />
     <Compile Include="Clases\clsEmpleado.cs" />
+    <Compile Include="Clases\clsFactura.cs" />
     <Compile Include="Clases\clsImagenesProducto.cs" />
     <Compile Include="Clases\clsLogin.cs" />
     <Compile Include="Clases\clsProducto.cs" />
     <Compile Include="Clases\clsTelefono.cs" />
     <Compile Include="Clases\clsTipoProducto.cs" />
+    <Compile Include="Clases\clsTipoTelefono.cs" />
     <Compile Include="Clases\clsUpload.cs" />
     <Compile Include="Clases\clsUsuario.cs" />
     <Compile Include="Clases\TokenGenerator.cs" />
     <Compile Include="Clases\TokenValidationHandler.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
+    <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\TelefonosController.cs" />
     <Compile Include="Controllers\TipoProductosController.cs" />
+    <Compile Include="Controllers\TipoTelefonosController.cs" />
     <Compile Include="Controllers\UploadFilesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -307,6 +311,7 @@
     <Compile Include="Models\ImagenesProducto.cs">
       <DependentUpon>DBSuper.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\libFactura.cs" />
     <Compile Include="Models\libLogin.cs" />
     <Compile Include="Models\NOtaCRedito.cs">
       <DependentUpon>DBSuper.tt</DependentUpon>

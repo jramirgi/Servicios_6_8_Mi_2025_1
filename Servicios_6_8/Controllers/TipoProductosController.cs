@@ -23,6 +23,13 @@ namespace Servicios_6_8.Controllers
             return TipoProducto.ConsultarTodos();
         }
         [HttpGet]
+        [Route("LlenarCombo")]
+        public List<TIpoPRoducto> LlenarCombo()
+        {
+            clsTipoProducto tipoProducto = new clsTipoProducto();
+            return tipoProducto.LlenarCombo();
+        }
+        [HttpGet]
         [Route("Consultar")]
         public TIpoPRoducto Consultar(int Codigo)
         {

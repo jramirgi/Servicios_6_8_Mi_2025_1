@@ -11,15 +11,16 @@ namespace Servicios_6_8.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using Newtonsoft.Json;
     public partial class Usuario_Perfil
     {
         public int id { get; set; }
         public int idUsuario { get; set; }
         public int idPerfil { get; set; }
         public bool Activo { get; set; }
-    
+        [JsonIgnore]
         public virtual Perfil Perfil { get; set; }
+        [JsonIgnore]
         public virtual Usuario Usuario { get; set; }
     }
 }

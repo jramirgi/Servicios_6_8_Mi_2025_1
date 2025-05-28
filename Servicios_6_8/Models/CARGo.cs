@@ -11,7 +11,7 @@ namespace Servicios_6_8.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using Newtonsoft.Json;
     public partial class CARGo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,7 +23,7 @@ namespace Servicios_6_8.Models
         public int Codigo { get; set; }
         public string Nombre { get; set; }
         public int Salario { get; set; }
-    
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EMpleadoCArgo> EMpleadoCArgoes { get; set; }
     }
